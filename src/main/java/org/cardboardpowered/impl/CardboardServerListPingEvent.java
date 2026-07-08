@@ -6,7 +6,7 @@ import java.util.Iterator;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
-import org.cardboardpowered.impl.util.IconCacheImpl;
+import org.cardboardpowered.impl.util.CardboardCachedServerIcon;
 
 import org.cardboardpowered.bridge.server.level.ServerPlayerBridge;
 import net.minecraft.network.Connection;
@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class CardboardServerListPingEvent extends ServerListPingEvent {
     
     public final Object[] players;
-    public IconCacheImpl icon;
+    public CardboardCachedServerIcon icon;
     
     //      public ServerListPingEvent(@NotNull InetAddress address, @NotNull String motd, boolean shouldSendChatPreviews, int numPlayers, int maxPlayers) {
 
@@ -28,7 +28,7 @@ public class CardboardServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public void setServerIcon(org.bukkit.util.CachedServerIcon icon) {
-        if (!(icon instanceof IconCacheImpl)) throw new IllegalArgumentException(icon + " was not created by Bukkit");
+        if (!(icon instanceof CardboardCachedServerIcon)) throw new IllegalArgumentException(icon + " was not created by Bukkit");
     }
 
     public Iterator<Player> iterator() throws UnsupportedOperationException {
