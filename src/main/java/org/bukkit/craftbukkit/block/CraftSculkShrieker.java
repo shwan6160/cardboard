@@ -33,7 +33,7 @@ public class CraftSculkShrieker extends CraftBlockEntityState<SculkShriekerBlock
         this.requirePlaced();
 
         ServerPlayer serverPlayer = player == null ? null : ((CraftPlayer) player).getHandle();
-        this.getBlockEntity().tryShriek(this.world.getHandle(), serverPlayer);
+        this.getBlockEntity().tryShriek(this.getWorld().getHandle(), serverPlayer);
     }
 
     @Override

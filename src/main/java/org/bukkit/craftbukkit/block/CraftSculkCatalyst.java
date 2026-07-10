@@ -26,10 +26,10 @@ public class CraftSculkCatalyst extends CraftBlockEntityState<SculkCatalystBlock
 
         // bloom() is for visual blooming effect, cursors are what changes the blocks.
         this.getBlockEntity().getListener().bloom(
-            this.world.getHandle(),
+            this.getWorld().getHandle(),
             this.getPosition(),
             this.getBlockEntity().getBlockState(),
-            this.world.getHandle().getRandom()
+            this.getWorld().getHandle().getRandom()
         );
         this.getBlockEntity().getListener().getSculkSpreader().addCursors(new BlockPos(block.getX(), block.getY(), block.getZ()), charge);
     }
@@ -52,10 +52,10 @@ public class CraftSculkCatalyst extends CraftBlockEntityState<SculkCatalystBlock
 
         // bloom() is for visual blooming effect, cursors are what changes the blocks.
         this.getBlockEntity().getListener().bloom(
-            this.world.getHandle(),
+            this.getWorld().getHandle(),
             this.getPosition(),
             this.getBlockEntity().getBlockState(),
-            this.world.getHandle().getRandom()
+            this.getWorld().getHandle().getRandom()
         );
         this.getBlockEntity().getListener().getSculkSpreader().addCursors(io.papermc.paper.util.MCUtil.toBlockPos(position), charge);
     }

@@ -22,11 +22,11 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.cardboardpowered.bridge.world.level.block.state.BlockStateBridge;
-import org.cardboardpowered.impl.world.CraftWorld;
+import org.bukkit.craftbukkit.CraftWorld;
 
 public class CraftBlockState implements BlockState {
 
-    protected final CraftWorld world;
+    private final CraftWorld world;
     private final BlockPos position;
     protected net.minecraft.world.level.block.state.BlockState data;
     @net.minecraft.world.level.block.Block.UpdateFlags
@@ -56,7 +56,7 @@ public class CraftBlockState implements BlockState {
     // Creates an unplaced copy of the given CraftBlockState at the given location
     protected CraftBlockState(CraftBlockState state, @Nullable Location location) {
         if (location == null) {
-            this.world = null;
+            this.world = state.world;
             this.position = state.getPosition().immutable();
         } else {
             this.world = (CraftWorld) location.getWorld();
@@ -102,7 +102,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public World getWorld() {
+    public CraftWorld getWorld() {
         this.requirePlaced();
         return this.world;
     }

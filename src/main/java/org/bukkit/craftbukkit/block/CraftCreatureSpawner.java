@@ -326,6 +326,6 @@ public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEnti
 
     @Override
     public net.minecraft.world.level.Level getInternalWorld() {
-        return this.world.getHandle();
+        return this.getWorld().getHandle();
     }
 }

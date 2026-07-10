@@ -43,18 +43,28 @@ public class ServerGamePacketListenerImplMixin_SignUpdateEvent {
                 lines[i] = ChatFormatting.stripFormatting(ChatFormatting.stripFormatting(astring[i]));
             ((MinecraftServerBridge)CraftServer.server).cardboard_runOnMainThread(() -> {
                 try {
-                    SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), player, lines);
+                    org.bukkit.block.sign.Side side = packet.isFrontText() ? org.bukkit.block.sign.Side.FRONT : org.bukkit.block.sign.Side.BACK;
+                    SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), player, lines, side);
                     CraftServer.INSTANCE.getPluginManager().callEvent(event);
             
                     if (!event.isCancelled()) {
                         BlockEntity tileentity = this.player.level().getBlockEntity(packet.getPos());
-                        SignBlockEntity tileentitysign = (SignBlockEntity) tileentity;
-                        System.arraycopy(CraftSign.sanitizeLines(event.getLines()), 0, ((SignBlockEntityBridge)tileentitysign).getTextBF(), 0, 4);
-                        //tileentitysign.editable = false;
+                        if (tileentity instanceof SignBlockEntity tileentitysign) {
+                            net.minecraft.world.level.block.entity.SignText oldText = tileentitysign.getText(packet.isFrontText());
+                            net.minecraft.network.chat.Component[] components = CraftSign.sanitizeLines(event.getLines());
+                            net.minecraft.world.level.block.entity.SignText newText = new net.minecraft.world.level.block.entity.SignText(components, components, oldText.getColor(), oldText.hasGlowingText());
+                            tileentitysign.setText(newText, packet.isFrontText());
+                            tileentitysign.setChanged();
+                            this.player.level().sendBlockUpdated(packet.getPos(), tileentitysign.getBlockState(), tileentitysign.getBlockState(), 3);
+                        }
                      }
-                } catch (NullPointerException serverNoLikeSigns) {}
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
             });
-        } catch (NullPointerException serverNoLikeSigns) {}
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
 

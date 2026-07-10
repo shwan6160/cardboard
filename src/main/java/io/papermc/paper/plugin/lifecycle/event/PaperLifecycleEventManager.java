@@ -1,7 +1,7 @@
 package io.papermc.paper.plugin.lifecycle.event;
 
 import com.google.common.base.Preconditions;
-//import io.papermc.paper.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfiguration;
+import io.papermc.paper.plugin.lifecycle.event.handler.configuration.AbstractLifecycleEventHandlerConfiguration;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.LifecycleEventHandlerConfiguration;
 import java.util.function.BooleanSupplier;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -21,6 +21,6 @@ public final class PaperLifecycleEventManager<O extends LifecycleEventOwner> imp
     @Override
     public void registerEventHandler(final LifecycleEventHandlerConfiguration<? super O> handlerConfiguration) {
         Preconditions.checkState(this.registrationCheck.getAsBoolean(), "Cannot register lifecycle event handlers");
-        //((AbstractLifecycleEventHandlerConfiguration<? super O, ?>) handlerConfiguration).registerFrom(this.owner);
+        ((AbstractLifecycleEventHandlerConfiguration<? super O, ?>) handlerConfiguration).registerFrom(this.owner);
     }
 }

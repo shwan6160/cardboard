@@ -48,7 +48,7 @@ public final class CapturedBlockState extends CraftBlockState {
     private void addBees() {
         // SPIGOT-5537: Horrible hack to manually add bees given Level#captureTreeGeneration does not support block entities
         if (this.treeBlock && this.getType() == Material.BEE_NEST) {
-            WorldGenLevel worldGenLevel = this.world.getHandle();
+            net.minecraft.world.level.WorldGenLevel worldGenLevel = (net.minecraft.world.level.WorldGenLevel) this.getWorldHandle();
             BlockPos pos = this.getPosition();
             RandomSource randomSource = worldGenLevel.getRandom();
 

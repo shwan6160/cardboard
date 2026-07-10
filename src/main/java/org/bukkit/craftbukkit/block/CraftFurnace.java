@@ -120,7 +120,7 @@ public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends
     @Override
     public void setRecipeUsedCount(CookingRecipe<?> furnaceRecipe, int count) {
         final var location = CraftNamespacedKey.toResourceKey(net.minecraft.core.registries.Registries.RECIPE, furnaceRecipe.getKey());
-        java.util.Optional<net.minecraft.world.item.crafting.RecipeHolder<?>> nmsRecipe = (this.isPlaced() ? this.world.getHandle().recipeAccess() : CraftServer.INSTANCE.getServer().getRecipeManager()).byKey(location);
+        java.util.Optional<net.minecraft.world.item.crafting.RecipeHolder<?>> nmsRecipe = (this.isPlaced() ? this.getWorld().getHandle().recipeAccess() : CraftServer.INSTANCE.getServer().getRecipeManager()).byKey(location);
         com.google.common.base.Preconditions.checkArgument(nmsRecipe.isPresent() && nmsRecipe.get().value() instanceof net.minecraft.world.item.crafting.AbstractCookingRecipe, furnaceRecipe.getKey() + " is not recognized as a valid and registered furnace recipe");
         if (count > 0) {
             this.getSnapshot().recipesUsed.put(location, count);

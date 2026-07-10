@@ -48,7 +48,7 @@ public class CraftLectern extends CraftBlockEntityState<LecternBlockEntity> impl
         boolean result = super.update(force, applyPhysics);
 
         if (result && this.getType() == Material.LECTERN && this.getWorldHandle() instanceof net.minecraft.world.level.Level) {
-            LecternBlock.signalPageChange(this.world.getHandle(), this.getPosition(), this.getHandle());
+            LecternBlock.signalPageChange(this.getWorld().getHandle(), this.getPosition(), this.getHandle());
         }
 
         return result;
