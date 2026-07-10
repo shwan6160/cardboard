@@ -90,6 +90,25 @@ public class ServerLevelMixin extends LevelMixin implements ServerLevelBridge {
         return serverLevelData;
     }
 
+	@Inject(method = "clockManager()Lnet/minecraft/world/clock/ServerClockManager;", at = @At("HEAD"), cancellable = true)
+	private void cardboard$onClockManager1(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.clock.ServerClockManager> cir) {
+		if (this.server == null) {
+			cir.setReturnValue(null);
+		}
+	}
+
+	@Inject(method = "clockManager()Lnet/minecraft/world/clock/ClockManager;", at = @At("HEAD"), cancellable = true)
+	private void cardboard$onClockManager2(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.clock.ClockManager> cir) {
+		if (this.server == null) {
+			cir.setReturnValue(null);
+		}
+	}
+
+	public net.minecraft.world.level.chunk.LevelChunk getChunkIfLoaded(int x, int z) {
+		net.minecraft.world.level.chunk.ChunkAccess chunk = ((ServerLevel)(Object)this).getChunkSource().getChunk(x, z, net.minecraft.world.level.chunk.status.ChunkStatus.FULL, false);
+		return chunk instanceof net.minecraft.world.level.chunk.LevelChunk ? (net.minecraft.world.level.chunk.LevelChunk) chunk : null;
+	}
+
 	@Override
 	public CraftServer getCraftServer() {
 		// TODO Auto-generated method stub

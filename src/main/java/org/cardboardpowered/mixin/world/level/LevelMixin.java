@@ -52,6 +52,12 @@ public abstract class LevelMixin implements LevelBridge {
         return null;
     }
 
+    @Shadow public Holder<DimensionType> dimensionTypeRegistration() { return null; }
+
+    public ResourceKey<DimensionType> getTypeKey() {
+        return dimensionTypeRegistration().unwrapKey().orElse(null);
+    }
+
     @Override
     public LevelEntityGetter<Entity> cb$get_entity_lookup() {
     	return getEntities();

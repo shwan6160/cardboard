@@ -19,6 +19,7 @@ accessible	field	net/minecraft/world/level/block/entity/BeehiveBlockEntity	saved
 accessible	field	net/minecraft/world/item/trading/MerchantOffer	rewardExp	Z
 mutable	field	net/minecraft/world/item/trading/MerchantOffer	maxUses	I
 accessible	field	net/minecraft/server/level/ChunkHolder	oldTicketLevel	I
+accessible	field	net/minecraft/server/level/ChunkHolder	playerProvider	Lnet/minecraft/server/level/ChunkHolder$PlayerProvider;
 accessible	field	net/minecraft/network/Connection	channel	Lio/netty/channel/Channel;
 # accessible	field	net/minecraft/server/world/ChunkTicket	argument	Ljava/lang/Object;
 extendable	class	net/minecraft/util/Unit
@@ -419,6 +420,9 @@ accessible field net/minecraft/world/level/BaseSpawner maxSpawnDelay I
 # accessible method net/minecraft/entity/Entity isInsideBubbleColumn ()Z
 accessible class net/minecraft/server/level/ChunkMap$TrackedEntity
 accessible field net/minecraft/server/level/ChunkMap entityMap Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+accessible field net/minecraft/server/level/ChunkMap level Lnet/minecraft/server/level/ServerLevel;
+accessible field net/minecraft/server/level/ChunkMap visibleChunkMap Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
+accessible field net/minecraft/server/level/ChunkMap updatingChunkMap Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
 accessible field net/minecraft/server/level/ChunkMap$TrackedEntity seenBy Ljava/util/Set;
 accessible field net/minecraft/world/flag/FeatureFlagRegistry names Ljava/util/Map;
 accessible field net/minecraft/world/flag/FeatureFlag universe Lnet/minecraft/world/flag/FeatureFlagUniverse;

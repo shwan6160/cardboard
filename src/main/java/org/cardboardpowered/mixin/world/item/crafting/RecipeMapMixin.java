@@ -69,4 +69,8 @@ public abstract class RecipeMapMixin implements RecipeMapBridge {
         // Paper end - why are you using a loop???
     }
     // Paper end - replace removeRecipe implementation
+
+	public java.util.Iterator<net.minecraft.world.item.crafting.RecipeHolder<?>> iterator() {
+		return ((RecipeMap)(Object)this).values().iterator();
+	}
 }

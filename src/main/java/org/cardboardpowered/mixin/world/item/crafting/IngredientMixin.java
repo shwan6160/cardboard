@@ -41,6 +41,14 @@ public class IngredientMixin implements IngredientBridge {
 		this.itemStacks = stacks;
 	}
 
+	public boolean isExact() {
+		return this.cb$isExact();
+	}
+
+	public java.util.List<ItemStack> itemStacks() {
+		return this.cb$itemStacks();
+	}
+
 	// Paper end
 	
 	

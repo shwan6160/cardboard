@@ -72,6 +72,16 @@ public abstract class JavaPlugin extends PluginBase {
     	// return this.description;
     }
 
+    private io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager<org.bukkit.plugin.Plugin> lifecycleManager = null;
+
+    @Override
+    public final io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager<org.bukkit.plugin.Plugin> getLifecycleManager() {
+        if (this.lifecycleManager == null) {
+            this.lifecycleManager = org.bukkit.craftbukkit.util.CraftMagicNumbers.INSTANCE.createPluginLifecycleEventManager(this, () -> true);
+        }
+        return this.lifecycleManager;
+    }
+
     protected JavaPlugin(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
         final ClassLoader classLoader = this.getClass().getClassLoader();
         if (classLoader instanceof PluginClassLoader)
