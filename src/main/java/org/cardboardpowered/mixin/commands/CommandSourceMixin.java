@@ -22,15 +22,7 @@ public interface CommandSourceMixin extends CommandSourceBridge {
 		if (null != source.entity) {
 			return ( (CommandSourceBridge) source.getEntity() ).getBukkitSender(source);
 		}
-			
-		CommandSource output = source.source;
-		
-		// Memic Default Error
-		String msg1 = " does not define or inherit an implementation of the resolved method 'org.bukkit.command.CommandSender";
-		String msg2 = " getBukkitSender(net.minecraft.class_2168/ServerCommandSource)' of interface IMixinCommandOutput.";
-		throw new AbstractMethodError(
-				"Receiver class " + output.getClass().getName() + msg1 +  msg2
-		);
+		return org.bukkit.Bukkit.getConsoleSender();
 	}
 
 }

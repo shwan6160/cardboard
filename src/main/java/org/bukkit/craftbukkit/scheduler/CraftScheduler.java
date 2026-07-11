@@ -358,6 +358,7 @@ public class CraftScheduler implements BukkitScheduler {
                 try {
                     task.run();
                 } catch (final Throwable throwable) {
+                    throwable.printStackTrace();
                     task.getOwner().getLogger().log(Level.WARNING, "Task #" + task.getTaskId() + " for " + task.getOwner().getDescription().getFullName() + "generated an exception", throwable);
                 } finally {currentTask = null; }
                 parsePending();

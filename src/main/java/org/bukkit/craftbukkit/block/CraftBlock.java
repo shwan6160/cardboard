@@ -362,7 +362,7 @@ public class CraftBlock implements Block {
 
     @Override
     public boolean isBlockPowered() {
-        return ((ServerLevel)this.world).getDirectSignalTo(this.position) > 0;
+        return ((ServerLevel)this.world).hasNeighborSignal(this.position);
     }
 
     @Override

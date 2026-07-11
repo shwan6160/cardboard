@@ -47,8 +47,10 @@ public class LifecycleEventRunner {
     }
 
     public <O extends LifecycleEventOwner, E extends PaperLifecycleEvent> void callEvent(final LifecycleEventType<O, ? super E, ?> eventType, final E event, final Predicate<? super O> ownerPredicate) {
+        System.out.println("DEBUG callEvent: " + eventType.name() + " with " + event);
         final AbstractLifecycleEventType<O, ? super E, ?> lifecycleEventType = (AbstractLifecycleEventType<O, ? super E, ?>) eventType;
         lifecycleEventType.forEachHandler(event, registeredHandler -> {
+            System.out.println("DEBUG run handler from: " + registeredHandler.owner().getPluginMeta().getDisplayName());
             try {
                 if (event instanceof final OwnerAwareLifecycleEvent<?> ownerAwareEvent) {
                     ownerAwareGenericHelper(ownerAwareEvent, registeredHandler.owner());

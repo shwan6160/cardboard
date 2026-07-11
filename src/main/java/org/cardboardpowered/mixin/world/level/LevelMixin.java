@@ -116,8 +116,33 @@ public abstract class LevelMixin implements LevelBridge {
     	this.world = world;
     }
 
+    private int cardboard$getPowerLevel(BlockState state) {
+        if (state == null) return 0;
+        if (state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.POWER)) {
+            return state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.POWER);
+        }
+        if (state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.POWERED)) {
+            return state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.POWERED) ? 15 : 0;
+        }
+        if (state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT)) {
+            net.minecraft.world.level.block.Block block = state.getBlock();
+            if (block instanceof net.minecraft.world.level.block.RedstoneTorchBlock || block instanceof net.minecraft.world.level.block.RedstoneWallTorchBlock) {
+                return state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT) ? 15 : 0;
+            }
+        }
+        return 0;
+    }
+
     @Inject(at = @At("HEAD"), method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z")
     public void setBlockState1(BlockPos pos, BlockState state, int flags, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir) {
+        if (((Level) (Object) this) instanceof ServerLevel) {
+            BlockState oldState = ((Level)(Object)this).getBlockState(pos);
+            int oldPower = cardboard$getPowerLevel(oldState);
+            int newPower = cardboard$getPowerLevel(state);
+            if (oldPower != newPower) {
+                org.bukkit.craftbukkit.event.CraftEventFactory.callRedstoneChange((Level)(Object)this, pos, oldPower, newPower);
+            }
+        }
         // TODO 1.17ify: if (!ServerWorld.isOutOfBuildLimitVertically(blockposition)) {
             LevelChunk chunk = getChunkAt(pos);
             boolean captured = false;

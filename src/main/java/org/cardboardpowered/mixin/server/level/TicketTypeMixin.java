@@ -25,9 +25,13 @@ public class TicketTypeMixin implements TicketTypeBridge {
 			// old 1.21.8: register("plugin", 0L, false, Use.LOADING_AND_SIMULATION);
 
 	// Paper - start
+    @org.cardboardpowered.asm.TransformAccess(25)
     private static final TicketType POST_TELEPORT = ChunkTicketBridge.POST_TELEPORT;
+    @org.cardboardpowered.asm.TransformAccess(25)
     private static final TicketType PLUGIN_TICKET = ChunkTicketBridge.PLUGIN_TICKET;
+    @org.cardboardpowered.asm.TransformAccess(25)
     private static final TicketType FUTURE_AWAIT = ChunkTicketBridge.FUTURE_AWAIT;
+    @org.cardboardpowered.asm.TransformAccess(25)
     private static final TicketType CHUNK_LOAD = ChunkTicketBridge.CHUNK_LOAD;
     // Paper - end
 

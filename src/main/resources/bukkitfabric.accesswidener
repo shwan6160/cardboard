@@ -952,3 +952,4 @@ accessible field net/minecraft/tags/TagEntry tag Z
 accessible field net/minecraft/tags/TagEntry required Z
 accessible field net/minecraft/world/level/Level levelData Lnet/minecraft/world/level/storage/WritableLevelData;
 accessible field net/minecraft/server/level/ServerLevel entityManager Lnet/minecraft/world/level/entity/PersistentEntitySectionManager;
+accessible field net/minecraft/server/level/ServerChunkCache ticketStorage Lnet/minecraft/world/level/TicketStorage;

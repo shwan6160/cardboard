@@ -64,6 +64,31 @@ public class CommandMapImpl extends SimpleCommandMap {
 		return knownCommands;
 	}
 
+	@Override
+	public Command getCommand(String name) {
+		Command command = super.getCommand(name);
+		if (command != null) {
+			return command;
+		}
+
+		net.minecraft.server.MinecraftServer server = org.bukkit.craftbukkit.CraftServer.server;
+		if (server != null) {
+			net.minecraft.commands.Commands dispatcher = server.getCommands();
+			if (dispatcher != null) {
+				com.mojang.brigadier.tree.CommandNode<?> node = dispatcher.getDispatcher().getRoot().getChild(name);
+				if (node != null) {
+					try {
+						return new MinecraftCommandWrapper(dispatcher, node);
+					} catch (Throwable t) {
+						t.printStackTrace();
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
 	private void registerCardboardCommands() {
 		register("bukkit", new VersionCommand("version"));
 		this.register("bukkit", new PluginsCommand("plugins"));

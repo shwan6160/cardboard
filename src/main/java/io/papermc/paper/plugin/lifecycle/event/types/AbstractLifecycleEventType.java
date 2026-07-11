@@ -48,6 +48,7 @@ public abstract class AbstractLifecycleEventType<O extends LifecycleEventOwner, 
     protected abstract void register(O owner, AbstractLifecycleEventHandlerConfiguration<O, E> config);
 
     public final void tryRegister(final O owner, final AbstractLifecycleEventHandlerConfiguration<O, E> config) {
+        System.out.println("DEBUG tryRegister: " + this.name + " for owner " + owner.getPluginMeta().getDisplayName());
         this.verifyOwner(owner);
         LifecycleEventRunner.INSTANCE.checkRegisteredHandler(owner, this);
         this.register(owner, config);

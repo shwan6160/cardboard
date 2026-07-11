@@ -488,6 +488,14 @@ public class CraftServer extends CardboardAbstractServer implements Server {
             } else new BukkitCommandWrapper(entry.getValue()).register(dispatcher.getDispatcher(), label);
         }
 
+        // Paper command registration lifecycle event
+        io.papermc.paper.plugin.lifecycle.event.LifecycleEventRunner.INSTANCE.callReloadableRegistrarEvent(
+            io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents.COMMANDS,
+            new org.cardboardpowered.impl.command.CardboardPaperCommands(dispatcher.getDispatcher()),
+            io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner.class,
+            io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent.Cause.INITIAL
+        );
+
         // Refresh commands
         for (ServerPlayer player : getHandle().getPlayers())
             dispatcher.sendCommands(player);
@@ -1964,6 +1972,7 @@ public class CraftServer extends CardboardAbstractServer implements Server {
             this.playerCommandState = true;
             return dispatchCommand(sender, serverCommand.msg);
         } catch (Exception ex) {
+            ex.printStackTrace();
             getLogger().log(Level.WARNING, "Unexpected exception while parsing console command \"" + serverCommand.msg + '"', ex);
             return false;
         } finally {

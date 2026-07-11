@@ -59,6 +59,7 @@
     "server.level.ServerPlayerMixin",
     "server.level.ServerPlayerMixin_DeathEvent",
     "server.level.TicketTypeMixin",
+    "server.level.TicketMixin",
     "server.level.WorldGenRegionMixin",
     "server.network.LegacyQueryHandlerMixin",
     "server.network.ServerConfigurationPacketListenerImplMixin",
@@ -233,6 +234,7 @@
     "world.level.storage.loot.parameters.LootContextParamsMixin",
     "world.level.storage.loot.predicates.ExplosionConditionMixin",
     "world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusConditionMixin",
+    "world.phys.shapes.CollisionContextMixin",
     "MixinDataFixTypes",
     "server.MixinDataLoadContext"
   ],

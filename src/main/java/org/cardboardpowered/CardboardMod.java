@@ -250,6 +250,7 @@ public class CardboardMod implements ModInitializer {
             CraftServer.INSTANCE.getPluginManager().callEvent(new org.bukkit.event.world.WorldInitEvent(((LevelBridge)nms).cardboard$getWorld()));
         } else {
             ((LevelBridge)nms).set_bukkit_world( new CraftWorld(name, nms) );
+            CraftServer.INSTANCE.getPluginManager().callEvent(new org.bukkit.event.world.WorldInitEvent(((LevelBridge)nms).cardboard$getWorld()));
         }
 
         // Object o = nms.convertable;
