@@ -1036,7 +1036,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
             final TagValueOutput output = TagValueOutput.createWithContext(problemReporter, level.registryAccess());
             this.getHandle().saveAsPassenger(output);//, false, true, true); // TODO
 
-            return net.minecraft.world.entity.EntityType.loadEntityRecursive(output.buildResult(), level, EntitySpawnReason.LOAD, EntityProcessor.NOP);
+            return net.minecraft.world.entity.EntityType.loadEntityRecursive(output.buildResult(), level, new net.minecraft.world.entity.EntitySpawnRequest(EntitySpawnReason.LOAD, false), EntityProcessor.NOP);
         }
     }
 

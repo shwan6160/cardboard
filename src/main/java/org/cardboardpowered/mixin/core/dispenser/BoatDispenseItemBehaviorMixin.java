@@ -82,7 +82,7 @@ public class BoatDispenseItemBehaviorMixin {
         
         if (null != entityboat) {
         	entityboat.setInitialPos(event.getVelocity().getX(), event.getVelocity().getY(), event.getVelocity().getZ());
-        	EntityType.createDefaultStackConfig(worldserver, itemstack, null).accept(entityboat);
+        	EntityType.createDefaultStackConfig(worldserver, itemstack, null).apply(entityboat);
         	entityboat.setYRot(enumdirection.toYRot());
         }
 

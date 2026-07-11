@@ -82,7 +82,6 @@ accessible	field	net/minecraft/world/entity/LivingEntity	lastDamageStamp	J
 mutable	field	net/minecraft/world/entity/LivingEntity	lastDamageStamp	J
 accessible	field	net/minecraft/world/entity/LivingEntity	brain	Lnet/minecraft/world/entity/ai/Brain;
 accessible	method	net/minecraft/world/entity/LivingEntity	isAlwaysExperienceDropper	()Z
-accessible	method	net/minecraft/world/entity/LivingEntity	blockedByItem	(Lnet/minecraft/world/entity/LivingEntity;)V
 accessible	method	net/minecraft/world/entity/LivingEntity	createWitherRose	(Lnet/minecraft/world/entity/LivingEntity;)V
 accessible	method	net/minecraft/world/entity/LivingEntity	jumpFromGround	()V
 accessible	method	net/minecraft/world/entity/LivingEntity	doAutoAttackOnTouch	(Lnet/minecraft/world/entity/LivingEntity;)V
@@ -200,8 +199,6 @@ accessible	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	levels
 mutable	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	levels	I
 accessible	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	name	Lnet/minecraft/network/chat/Component;
 mutable	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	name	Lnet/minecraft/network/chat/Component;
-accessible	field	net/minecraft/world/level/block/entity/BedBlockEntity	color	Lnet/minecraft/world/item/DyeColor;
-mutable	field	net/minecraft/world/level/block/entity/BedBlockEntity	color	Lnet/minecraft/world/item/DyeColor;
 accessible	field	net/minecraft/world/level/block/entity/BlockEntity	type	Lnet/minecraft/world/level/block/entity/BlockEntityType;
 mutable	field	net/minecraft/world/level/block/entity/BlockEntity	type	Lnet/minecraft/world/level/block/entity/BlockEntityType;
 accessible	field	net/minecraft/world/level/block/entity/BlockEntity	level	Lnet/minecraft/world/level/Level;
@@ -289,7 +286,6 @@ extendable	class	net/minecraft/core/Direction
 # mutable	field	net/minecraft/util/math/Direction	name	Ljava/lang/String;
 accessible	field	net/minecraft/core/Direction	BY_2D_DATA	[Lnet/minecraft/core/Direction;
 extendable	class	net/minecraft/ChatFormatting
-accessible	field	net/minecraft/ChatFormatting	name	Ljava/lang/String;
 accessible	field	net/minecraft/ChatFormatting	code	C
 accessible	field	net/minecraft/core/Vec3i	x	I
 mutable	field	net/minecraft/core/Vec3i	x	I

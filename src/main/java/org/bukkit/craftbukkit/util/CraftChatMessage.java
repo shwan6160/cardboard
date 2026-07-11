@@ -105,7 +105,7 @@ public final class CraftChatMessage {
                                 this.modifier = StringMessage.RESET.withColor(TextColor.parseColor(this.hex.toString()).result().orElse(null)); // Paper
                                 this.hex = null;
                             }
-                        } else if (format.isFormat() && format != ChatFormatting.RESET) {
+                        } else if (format.code >= 'k' && format.code <= 'o' && format != ChatFormatting.RESET) {
                             switch (format) {
                                 case BOLD:
                                     this.modifier = this.modifier.withBold(Boolean.TRUE);

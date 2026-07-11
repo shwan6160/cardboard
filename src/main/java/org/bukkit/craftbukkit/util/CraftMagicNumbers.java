@@ -457,7 +457,7 @@ public final class CraftMagicNumbers implements UnsafeValues, IMagicNumbers {
     @Override
     public String getTranslationKey(EntityType entityType) {
         Preconditions.checkArgument(entityType.getName() != null, "Invalid name of EntityType %s for translation key", entityType);
-        return net.minecraft.world.entity.EntityType.byString(entityType.getName()).map(net.minecraft.world.entity.EntityType::getDescriptionId).orElseThrow();
+        return net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getOptional(net.minecraft.resources.Identifier.tryParse(entityType.getName())).map(net.minecraft.world.entity.EntityType::getDescriptionId).orElseThrow();
     }
 
     @Override
@@ -783,7 +783,7 @@ public final class CraftMagicNumbers implements UnsafeValues, IMagicNumbers {
             nmsEntity = net.minecraft.world.entity.EntityType.create(
                     TagValueInput.create(problemReporter, world.registryAccess(), compound),
                     world,
-                    net.minecraft.world.entity.EntitySpawnReason.LOAD
+                    new net.minecraft.world.entity.EntitySpawnRequest(net.minecraft.world.entity.EntitySpawnReason.LOAD, false)
             ).orElseThrow(() -> new IllegalArgumentException("An ID was not found for the data. Did you downgrade?"));
         }
 

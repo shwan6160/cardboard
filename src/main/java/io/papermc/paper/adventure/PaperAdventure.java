@@ -431,8 +431,30 @@ public final class PaperAdventure {
 
     // Colors
 
+    private static Integer getFormattingColor(ChatFormatting formatting) {
+        switch (formatting) {
+            case BLACK: return 0x000000;
+            case DARK_BLUE: return 0x0000aa;
+            case DARK_GREEN: return 0x00aa00;
+            case DARK_AQUA: return 0x00aaaa;
+            case DARK_RED: return 0xaa0000;
+            case DARK_PURPLE: return 0xaa00aa;
+            case GOLD: return 0xffaa00;
+            case GRAY: return 0xaaaaaa;
+            case DARK_GRAY: return 0x555555;
+            case BLUE: return 0x5555ff;
+            case GREEN: return 0x55ff55;
+            case AQUA: return 0x55ffff;
+            case RED: return 0xff5555;
+            case LIGHT_PURPLE: return 0xff55ff;
+            case YELLOW: return 0xffff55;
+            case WHITE: return 0xffffff;
+            default: return null;
+        }
+    }
+
     public static @NotNull TextColor asAdventure(final ChatFormatting formatting) {
-        final Integer color = formatting.getColor();
+        final Integer color = getFormattingColor(formatting);
         if (color == null) {
             throw new IllegalArgumentException("Not a valid color");
         }
@@ -448,7 +470,8 @@ public final class PaperAdventure {
     @org.jspecify.annotations.Nullable
     public static ChatFormatting getByHexValue(int color) {
         for (ChatFormatting value : ChatFormatting.values()) {
-            if (value.getColor() != null && value.getColor() == color) {
+            Integer valColor = getFormattingColor(value);
+            if (valColor != null && valColor == color) {
                 return value;
             }
         }

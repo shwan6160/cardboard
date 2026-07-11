@@ -25,7 +25,7 @@ public class TeleportTargetExtra {
      }
     
     private static Vec3 getWorldSpawnPos(ServerLevel world, Entity entity) {
-        return entity.adjustSpawnLocation(world, world.getRespawnData().pos()).getBottomCenter();
+        return net.minecraft.world.phys.Vec3.atBottomCenterOf(entity.adjustSpawnLocation(world, world.getRespawnData().pos()));
      }
 	
 }

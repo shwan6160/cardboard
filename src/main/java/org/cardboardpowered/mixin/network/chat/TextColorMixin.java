@@ -19,7 +19,7 @@ public class TextColorMixin implements TextColorBridge {
     @Inject(method = "<init>(ILjava/lang/String;)V", at = @At("RETURN"))
     private void initFormat(int value, String name, CallbackInfo ci) {
         if (name != null) {
-            this.format = ChatFormatting.getByName(name);
+            this.format = ChatFormatting.valueOf(name.toUpperCase(java.util.Locale.ROOT));
         } else {
             this.format = null;
         }

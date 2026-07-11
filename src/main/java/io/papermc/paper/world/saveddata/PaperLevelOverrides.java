@@ -176,6 +176,12 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
     }
 
     @Override
+    public void setAllowCommands(final boolean allowCommands) {
+        this.syncRootData(rootData -> rootData.setAllowCommands(allowCommands));
+        this.setDirty();
+    }
+
+    @Override
     public boolean isInitialized() {
         return this.initialized;
     }

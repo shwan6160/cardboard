@@ -3,11 +3,11 @@ package org.bukkit.craftbukkit.block.impl;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.annotation.GeneratedClass;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.PointedDripstoneBlock;
+import net.minecraft.world.level.block.SpeleothemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.SpeleothemThickness;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.PointedDripstone;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
@@ -18,11 +18,11 @@ import java.util.Set;
 @NullMarked
 @GeneratedClass
 public class CraftPointedDripstone extends CraftBlockData implements PointedDripstone {
-    private static final EnumProperty<DripstoneThickness> THICKNESS = PointedDripstoneBlock.THICKNESS;
+    private static final EnumProperty<SpeleothemThickness> THICKNESS = SpeleothemBlock.THICKNESS;
 
-    private static final EnumProperty<Direction> TIP_DIRECTION = PointedDripstoneBlock.TIP_DIRECTION;
+    private static final EnumProperty<Direction> TIP_DIRECTION = SpeleothemBlock.TIP_DIRECTION;
 
-    private static final BooleanProperty WATERLOGGED = PointedDripstoneBlock.WATERLOGGED;
+    private static final BooleanProperty WATERLOGGED = SpeleothemBlock.WATERLOGGED;
 
     public CraftPointedDripstone(BlockState state) {
         super(state);
