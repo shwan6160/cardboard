@@ -90,9 +90,12 @@ public class BukkitLogger extends Logger {
         	} else {
         		log4j.atLevel(level).log(lr.getMessage());
         	}
-            // log4j.log(level, lr.getMessage());
         } else {
-        	log4j.atLevel(level).log(lr.getMessage(), lr.getThrown());
+            if (this.doPrefix) {
+                log4j.atLevel(level).setCause(lr.getThrown()).log("[" + this.getName() + "] " + lr.getMessage());
+            } else {
+                log4j.atLevel(level).setCause(lr.getThrown()).log(lr.getMessage());
+            }
         }
     }
     

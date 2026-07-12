@@ -29,10 +29,14 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
 
     public CraftSign(World world, T blockEntity) {
         super(world, blockEntity);
+        this.front = new CraftSignSide(blockEntity.getFrontText());
+        this.back = new CraftSignSide(blockEntity.getBackText());
     }
 
     protected CraftSign(CraftSign<T> state, Location location) {
         super(state, location);
+        this.front = state.front;
+        this.back = state.back;
     }
 
     @Override

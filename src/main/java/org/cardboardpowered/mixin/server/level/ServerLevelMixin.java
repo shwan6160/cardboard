@@ -54,21 +54,13 @@ public class ServerLevelMixin extends LevelMixin implements ServerLevelBridge {
 	private LevelLoadListener cardboard$levelLoadListener;
 
 	@Inject(method = "<init>", at = @At(value = "RETURN"))
-    private void cardboard$initWorldServer(
-    		MinecraftServer minecraftserver,
-    		Executor executor,
-    		LevelStorageSource.LevelStorageAccess convertable_conversionsession,
-    		ServerLevelData iworlddataserver, ResourceKey<Level> resourcekey,
-    		LevelStem worlddimension, // WorldGenerationProgressListener worldloadlistener,
-    		boolean flag, long i2, List<CustomSpawner> list, boolean flag1,
-    		CallbackInfo ci
-    	) {
+    private void cardboard$initWorldServer(CallbackInfo ci) {
 		
 		if (CardboardConfig.DEBUG_OTHER) {
 			CardboardMod.LOGGER.info("Debug: getting world uuid");
 		}
 
-        this.cardboard$session = convertable_conversionsession;
+        this.cardboard$session = this.server.storageSource;
         this.cardboard$uuid = Utils.getWorldUUID(cardboard$session.getDimensionPath(((ServerLevel)(Object)this).dimension()).toFile());
         
         // TODO: add ServerWorld argument to LoggingChunkLoadProgress constructor
@@ -90,17 +82,27 @@ public class ServerLevelMixin extends LevelMixin implements ServerLevelBridge {
         return serverLevelData;
     }
 
+	private net.minecraft.world.clock.ServerClockManager clockManager;
+
 	@Inject(method = "clockManager()Lnet/minecraft/world/clock/ServerClockManager;", at = @At("HEAD"), cancellable = true)
 	private void cardboard$onClockManager1(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.clock.ServerClockManager> cir) {
-		if (this.server == null) {
+		if (this.clockManager != null) {
+			cir.setReturnValue(this.clockManager);
+		} else if (this.server == null) {
 			cir.setReturnValue(null);
+		} else {
+			cir.setReturnValue(this.server.clockManager());
 		}
 	}
 
 	@Inject(method = "clockManager()Lnet/minecraft/world/clock/ClockManager;", at = @At("HEAD"), cancellable = true)
 	private void cardboard$onClockManager2(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.clock.ClockManager> cir) {
-		if (this.server == null) {
+		if (this.clockManager != null) {
+			cir.setReturnValue(this.clockManager);
+		} else if (this.server == null) {
 			cir.setReturnValue(null);
+		} else {
+			cir.setReturnValue(this.server.clockManager());
 		}
 	}
 

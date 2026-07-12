@@ -980,8 +980,19 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
 	@Override
 	public UUID getUID() {
-		return world.cardboard$get_uuid();
-		// return Utils.getWorldUUID(getWorldFolder());
+		UUID uuid = world.cardboard$get_uuid();
+		if (uuid == null) {
+			net.minecraft.server.MinecraftServer server = world.getServer();
+			if (server == null && org.bukkit.craftbukkit.CraftServer.INSTANCE != null) {
+				server = org.bukkit.craftbukkit.CraftServer.INSTANCE.getServer();
+			}
+			if (server != null) {
+				java.io.File dir = server.storageSource.getDimensionPath(world.dimension()).toFile();
+				uuid = com.javazilla.bukkitfabric.Utils.getWorldUUID(dir);
+				world.cardboard$set_uuid(uuid);
+			}
+		}
+		return uuid;
 	}
 
 	@Override
@@ -1627,6 +1638,11 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
 	@Override
 	public void setTicksPerMonsterSpawns(int arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void setAllowMonsterSpawning(boolean allow) {
 		// TODO Auto-generated method stub
 	}
 

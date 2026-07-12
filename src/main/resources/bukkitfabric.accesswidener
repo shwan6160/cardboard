@@ -949,3 +949,7 @@ accessible field net/minecraft/tags/TagEntry required Z
 accessible field net/minecraft/world/level/Level levelData Lnet/minecraft/world/level/storage/WritableLevelData;
 accessible field net/minecraft/server/level/ServerLevel entityManager Lnet/minecraft/world/level/entity/PersistentEntitySectionManager;
 accessible field net/minecraft/server/level/ServerChunkCache ticketStorage Lnet/minecraft/world/level/TicketStorage;
+accessible field net/minecraft/server/network/ServerCommonPacketListenerImpl transferred Z
+accessible method net/minecraft/world/entity/projectile/arrow/Arrow getPotionContents ()Lnet/minecraft/world/item/alchemy/PotionContents;
+accessible method net/minecraft/world/entity/projectile/arrow/Arrow setPotionContents (Lnet/minecraft/world/item/alchemy/PotionContents;)V
+accessible method net/minecraft/server/level/ServerLevel getEntities ()Lnet/minecraft/world/level/entity/LevelEntityGetter;
