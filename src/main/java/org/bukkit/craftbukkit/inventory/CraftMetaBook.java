@@ -240,46 +240,13 @@ public class CraftMetaBook extends CraftMetaItem implements BookMeta, WritableBo
         this.pages = pages.subList(0, Math.min(MAX_PAGES, pages.size())).stream().map(net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection()::serialize).collect(java.util.stream.Collectors.toList());
     }
 
-    static class CraftMetaBookBuilder implements BookMetaBuilder {
-        protected final List<net.kyori.adventure.text.Component> pages = new ArrayList<>();
-
-        @Override
-        public BookMetaBuilder title(net.kyori.adventure.text.Component title) {
-            return this;
-        }
-
-        @Override
-        public BookMetaBuilder author(net.kyori.adventure.text.Component author) {
-            return this;
-        }
-
-        @Override
-        public BookMetaBuilder addPage(net.kyori.adventure.text.Component page) {
-            this.pages.add(page);
-            return this;
-        }
-
-        @Override
-        public BookMetaBuilder pages(net.kyori.adventure.text.Component... pages) {
-            java.util.Collections.addAll(this.pages, pages);
-            return this;
-        }
-
-        @Override
-        public BookMetaBuilder pages(java.util.Collection<net.kyori.adventure.text.Component> pages) {
-            this.pages.addAll(pages);
-            return this;
-        }
-
-        @Override
-        public BookMeta build() {
-            return new CraftMetaBook(this.pages);
-        }
-    }
-
     @Override
-    public BookMetaBuilder toBuilder() {
-        return new CraftMetaBookBuilder();
+    public @org.jetbrains.annotations.NotNull net.kyori.adventure.inventory.Book asBook() {
+        return net.kyori.adventure.inventory.Book.book(
+            this.hasTitle() ? net.kyori.adventure.text.Component.text(this.getTitle()) : net.kyori.adventure.text.Component.empty(),
+            this.hasAuthor() ? net.kyori.adventure.text.Component.text(this.getAuthor()) : net.kyori.adventure.text.Component.empty(),
+            this.pages().stream().map(p -> (net.kyori.adventure.text.Component) p).toList()
+        );
     }
 
     @Override

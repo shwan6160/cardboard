@@ -79,8 +79,7 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     public boolean isTransferred() {
-        return false; // TODO
-    	// return ((ServerCommonNetworkHandler)this.handle).isTransferred();
+        return ((ServerCommonPacketListenerImpl)this.handle).transferred;
     }
 
     public SocketAddress getAddress() {
@@ -92,15 +91,12 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     public @Nullable InetSocketAddress getVirtualHost() {
-        return null; // TODO
-    	// return ((ServerCommonNetworkHandler)this.handle).connection.virtualHost;
+        return ((org.cardboardpowered.bridge.network.ConnectionBridge) ((ServerCommonPacketListenerImpl)this.handle).connection).getVirtualHost();
     }
 
     public @Nullable InetSocketAddress getHAProxyAddress() {
-        return null; // TODO
-    	// InetSocketAddress inetSocketAddress;
-        // SocketAddress socketAddress = ((ServerCommonNetworkHandler)this.handle).connection.haProxyAddress;
-        // return socketAddress instanceof InetSocketAddress ? (inetSocketAddress = (InetSocketAddress)socketAddress) : null;
+        SocketAddress socketAddress = ((org.cardboardpowered.bridge.network.ConnectionBridge) ((ServerCommonPacketListenerImpl)this.handle).connection).getHAProxyAddress();
+        return socketAddress instanceof InetSocketAddress ? (InetSocketAddress)socketAddress : null;
     }
 
     public void storeCookie(NamespacedKey key, byte[] value) {

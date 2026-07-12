@@ -47,6 +47,11 @@ public class PaperPlayerGameConnection extends PaperCommonConnection<ServerGameP
     }
 
 	@Override
+	public String getClientBrandName() {
+		return "vanilla";
+	}
+
+	@Override
 	public boolean isConnected() {
 		return getPlayer().isConnected();
 	}

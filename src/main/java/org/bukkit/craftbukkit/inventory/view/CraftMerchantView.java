@@ -24,12 +24,11 @@ public class CraftMerchantView extends CraftInventoryView<MerchantMenu, Merchant
     @NotNull
     @Override
     public Merchant getMerchant() {
-    	
-    	if (this.trader instanceof AbstractVillager) {
-    		return (CraftAbstractVillager) (((EntityBridge)this.trader).getBukkitEntity());
-    	}
-    	
-    	return null; // TODO
-        // return this.trader.getCraftMerchant();
+        if (this.trader instanceof AbstractVillager) {
+            return (CraftAbstractVillager) (((EntityBridge)this.trader).getBukkitEntity());
+        } else if (this.trader instanceof org.bukkit.craftbukkit.inventory.CraftMerchantCustom.MinecraftMerchant) {
+            return ((org.bukkit.craftbukkit.inventory.CraftMerchantCustom.MinecraftMerchant) this.trader).getCraftMerchant();
+        }
+        return null;
     }
 }

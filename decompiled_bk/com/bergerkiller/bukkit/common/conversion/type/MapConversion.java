@@ -1,0 +1,84 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  org.bukkit.map.MapCursor
+ */
+package com.bergerkiller.bukkit.common.conversion.type;
+
+import com.bergerkiller.bukkit.common.map.MapMarker;
+import com.bergerkiller.bukkit.common.wrappers.Holder;
+import com.bergerkiller.generated.net.minecraft.world.level.saveddata.maps.MapDecorationHandle;
+import com.bergerkiller.generated.net.minecraft.world.level.saveddata.maps.MapDecorationTypeHandle;
+import com.bergerkiller.mountiplex.conversion.annotations.ConverterMethod;
+import org.bukkit.map.MapCursor;
+
+public class MapConversion {
+    @ConverterMethod(output="net.minecraft.world.level.saveddata.maps.MapDecoration")
+    public static Object toMapIconHandle(MapCursor cursor) {
+        return MapDecorationHandle.fromCursor(cursor).getRaw();
+    }
+
+    @ConverterMethod(input="net.minecraft.world.level.saveddata.maps.MapDecoration")
+    public static MapCursor toMapCursor(Object nmsMapCursorHandle) {
+        return MapDecorationHandle.createHandle(nmsMapCursorHandle).toCursor();
+    }
+
+    @ConverterMethod(input="net.minecraft.core.Holder<net.minecraft.world.level.saveddata.maps.MapDecorationType>", optional=true)
+    public static Holder<MapDecorationTypeHandle> holderFromNMSHolder(Object nmsHolder) {
+        return Holder.fromHandle(nmsHolder, MapDecorationTypeHandle::createHandle);
+    }
+
+    @ConverterMethod(output="net.minecraft.core.Holder<net.minecraft.world.level.saveddata.maps.MapDecorationType>", optional=true)
+    public static Object nmsHolderFromHolder(Holder<MapDecorationTypeHandle> holder) {
+        return holder.toRawHolder();
+    }
+
+    @ConverterMethod(input="net.minecraft.world.level.saveddata.maps.MapDecorationType")
+    public static Holder<MapDecorationTypeHandle> holderFromDecorationType(Object nmsDecorationType) {
+        return Holder.directWrap(nmsDecorationType, MapDecorationTypeHandle::createHandle);
+    }
+
+    @ConverterMethod(output="net.minecraft.world.level.saveddata.maps.MapDecorationType")
+    public static Object decorationTypeFromHolder(Holder<MapDecorationTypeHandle> holder) {
+        return holder.rawValue();
+    }
+
+    @ConverterMethod(output="net.minecraft.world.level.saveddata.maps.MapDecorationType")
+    public static Object decorationTypeFromId(byte typeId) {
+        return MapConversion.getTypeFromId(typeId).getHandle().rawValue();
+    }
+
+    @ConverterMethod(input="net.minecraft.core.Holder<net.minecraft.world.level.saveddata.maps.MapDecorationType>", optional=true)
+    public static MapMarker.Type getTypeFromNMSHolder(Object nmsHolder) {
+        return MapMarker.Type.fromHandle(MapConversion.holderFromNMSHolder(nmsHolder));
+    }
+
+    @ConverterMethod(output="net.minecraft.core.Holder<net.minecraft.world.level.saveddata.maps.MapDecorationType>", optional=true)
+    public static Object getNMSHolderFromType(MapMarker.Type type) {
+        return type.getHandle().toRawHolder();
+    }
+
+    @ConverterMethod(input="net.minecraft.world.level.saveddata.maps.MapDecorationType")
+    public static MapMarker.Type getTypeFromDecorationType(Object nmsDecorationType) {
+        return MapMarker.Type.fromHandle(MapConversion.holderFromDecorationType(nmsDecorationType));
+    }
+
+    @ConverterMethod(output="net.minecraft.world.level.saveddata.maps.MapDecorationType")
+    public static Object getDecorationTypeFromType(MapMarker.Type type) {
+        return type.getHandle().rawValue();
+    }
+
+    @ConverterMethod
+    @Deprecated
+    public static MapMarker.Type getTypeFromId(byte typeId) {
+        return MapMarker.Type.fromLegacyId(typeId);
+    }
+
+    @ConverterMethod
+    @Deprecated
+    public static byte getIdFromType(MapMarker.Type type) {
+        return type.id();
+    }
+}
+

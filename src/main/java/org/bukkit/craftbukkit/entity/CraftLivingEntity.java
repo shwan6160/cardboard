@@ -991,6 +991,21 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 	}
 
 	@Override
+	public @Nullable Sound getHurtSound(@NotNull org.bukkit.damage.DamageSource damageSource) {
+		return this.getHurtSound();
+	}
+
+	@Override
+	public float getSoundVolume() {
+		return 1.0F;
+	}
+
+	@Override
+	public float getSoundPitch() {
+		return 1.0F;
+	}
+
+	@Override
 	public void knockback(double arg0, double arg1, double arg2) {
 		 this.getHandle().knockback(arg0, arg2, arg2, this.getHandle().damageSources().generic(), 1.0F);
 	}

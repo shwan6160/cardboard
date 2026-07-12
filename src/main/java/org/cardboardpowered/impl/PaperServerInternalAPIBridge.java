@@ -125,4 +125,63 @@ public class PaperServerInternalAPIBridge implements InternalAPIBridge {
 		return null;
 	}
 
+	@Override
+	public net.kyori.adventure.text.flattener.ComponentFlattener componentFlattener() {
+		return io.papermc.paper.adventure.PaperAdventure.FLATTENER;
+	}
+
+	@Override
+	public Component resolveWithContext(
+			final Component component, 
+			final org.bukkit.command.CommandSender context, 
+			final org.bukkit.entity.Entity scoreboardSubject, 
+			final boolean bypassPermissions
+	) throws java.io.IOException {
+		return component;
+	}
+
+	@Override
+	public org.bukkit.inventory.ItemStack createEmptyStack() {
+		return org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(net.minecraft.world.item.ItemStack.EMPTY);
+	}
+
+	@Override
+	public io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager<org.bukkit.plugin.Plugin> createPluginLifecycleEventManager(
+			final org.bukkit.plugin.java.JavaPlugin plugin, 
+			final java.util.function.BooleanSupplier registrationCheck
+	) {
+		return new io.papermc.paper.plugin.lifecycle.event.PaperLifecycleEventManager<>(plugin, registrationCheck);
+	}
+
+	@Override
+	public String getStatisticCriteriaKey(org.bukkit.Statistic statistic) {
+		if (statistic.getType() != org.bukkit.Statistic.Type.UNTYPED) return "minecraft.custom:minecraft." + statistic.getKey().getKey();
+		return org.bukkit.craftbukkit.CraftStatistic.getNMSStatistic(statistic).getName();
+	}
+
+	@Override
+	public org.bukkit.attribute.Attributable getDefaultEntityAttributes(org.bukkit.NamespacedKey entityKey) {
+		var supplier = net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier((net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>) net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getValue(org.bukkit.craftbukkit.util.CraftNamespacedKey.toMinecraft(entityKey)));
+		return new io.papermc.paper.attribute.UnmodifiableAttributeMap(supplier);
+	}
+
+	@Override
+	public boolean hasDefaultEntityAttributes(org.bukkit.NamespacedKey entityKey) {
+		return net.minecraft.world.entity.ai.attributes.DefaultAttributes.hasSupplier(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getValue(org.bukkit.craftbukkit.util.CraftNamespacedKey.toMinecraft(entityKey)));
+	}
+
+	@Override
+	public org.bukkit.inventory.ItemStack deserializeItem(byte[] data) {
+		return org.bukkit.craftbukkit.util.CraftMagicNumbers.INSTANCE.deserializeItem(data);
+	}
+
+	@Override
+	public String getTranslationKey(org.bukkit.entity.EntityType entityType) {
+		return org.bukkit.craftbukkit.util.CraftMagicNumbers.INSTANCE.getTranslationKey(entityType);
+	}
+
+	@Override
+	public org.bukkit.damage.DamageSource.Builder createDamageSourceBuilder(org.bukkit.damage.DamageType damageType) {
+		return org.bukkit.craftbukkit.util.CraftMagicNumbers.INSTANCE.createDamageSourceBuilder(damageType);
+	}
 }

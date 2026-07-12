@@ -1,0 +1,37 @@
+Summary for /data/minecraft/ug-edge/plugins/BKCommonLib-2.0.1-2025.jar
+Decompiled with CFR 0.152
+
+
+com.bergerkiller.bukkit.common.config.yaml.YamlEntry
+----------------------------
+
+setValue(java.lang.Object )
+  Unable to fully structure code
+
+
+com.bergerkiller.bukkit.common.dep.gson.internal.$Gson$Types
+----------------------------
+
+resolve(java.lang.reflect.Type java.lang.Class<?> java.lang.reflect.Type java.util.Map<java.lang.reflect.TypeVariable<?>, java.lang.reflect.Type> )
+  Unable to fully structure code
+
+
+com.bergerkiller.bukkit.common.dep.cloud.services.ServiceSpigot
+----------------------------
+
+complete()
+  Exception : java.lang.NullPointerException: Cannot invoke "org.benf.cfr.reader.bytecode.analysis.types.JavaRefTypeInstance$Annotated.pathIterator()" because the return value of "org.benf.cfr.reader.bytecode.analysis.types.JavaRefTypeInstance$Annotated.access$300(org.benf.cfr.reader.bytecode.analysis.types.JavaRefTypeInstance$Annotated)" is null
+
+
+com.bergerkiller.mountiplex.dep.org.objectweb.asm.signature.SignatureReader
+----------------------------
+
+parseType(java.lang.String int com.bergerkiller.mountiplex.dep.org.objectweb.asm.signature.SignatureVisitor )
+  Unable to fully structure code
+
+
+com.bergerkiller.mountiplex.dep.javassist.bytecode.CodeIterator
+----------------------------
+
+insertGap2w(byte[] int int boolean java.util.List<com.bergerkiller.mountiplex.dep.javassist.bytecode.CodeIterator$Branch> com.bergerkiller.mountiplex.dep.javassist.bytecode.CodeIterator$Pointers )
+  Unable to fully structure code

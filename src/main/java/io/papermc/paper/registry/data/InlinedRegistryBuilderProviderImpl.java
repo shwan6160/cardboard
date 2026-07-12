@@ -44,5 +44,15 @@ public final class InlinedRegistryBuilderProviderImpl implements InlinedRegistry
 		return Conversions.global().createApiInstanceFromBuilder(io.papermc.paper.registry.RegistryKey.DIALOG, value);
 	}
 
-    
+	@Override
+	public org.bukkit.inventory.meta.trim.TrimMaterial createTrimMaterial(
+			Consumer<RegistryBuilderFactory<org.bukkit.inventory.meta.trim.TrimMaterial, ? extends io.papermc.paper.registry.data.TrimMaterialRegistryEntry.Builder>> value) {
+		return Conversions.global().createApiInstanceFromBuilder(io.papermc.paper.registry.RegistryKey.TRIM_MATERIAL, value);
+	}
+
+	@Override
+	public org.bukkit.inventory.meta.trim.TrimPattern createTrimPattern(
+			Consumer<RegistryBuilderFactory<org.bukkit.inventory.meta.trim.TrimPattern, ? extends io.papermc.paper.registry.data.TrimPatternRegistryEntry.Builder>> value) {
+		return Conversions.global().createApiInstanceFromBuilder(io.papermc.paper.registry.RegistryKey.TRIM_PATTERN, value);
+	}
 }

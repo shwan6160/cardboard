@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PrepareRamNearestTarget.class)
 public class PrepareRamNearestTargetMixin {
 
-    @Inject(method = "method_36270",
+    @Inject(method = "lambda$start$2",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/ai/behavior/PrepareRamNearestTarget;chooseRamPosition(Lnet/minecraft/world/entity/PathfinderMob;Lnet/minecraft/world/entity/LivingEntity;)V"), cancellable = true)
     private void targetEvent(PathfinderMob pathAwareEntity, LivingEntity mob, CallbackInfo ci) {

@@ -1,0 +1,9 @@
+Summary for /data/minecraft/ug-edge/plugins/TrainCarts-2.0.0-1720.jar
+Decompiled with CFR 0.152
+
+
+com.bergerkiller.bukkit.tc.signactions.SignActionSwitcher
+----------------------------
+
+<init>(com.bergerkiller.bukkit.tc.signactions.SignActionSwitcher com.bergerkiller.bukkit.tc.events.SignActionEvent )
+  Unable to fully structure code

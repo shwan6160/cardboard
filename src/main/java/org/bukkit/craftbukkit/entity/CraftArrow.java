@@ -67,22 +67,23 @@ public class CraftArrow extends CraftAbstractArrow implements Arrow {
 
     @Override
     public void setBasePotionData(PotionData data) {
-        // TODO
+        this.setBasePotionType(data.getType());
     }
 
     @Override
     public PotionData getBasePotionData() {
-        return null; // TODO
+        PotionType type = this.getBasePotionType();
+        return (type != null) ? new PotionData(type) : null;
     }
 
     @Override
     public void setBasePotionType(PotionType potionType) {
-        // TODO
+        this.getHandle().setPotionContents(this.getHandle().getPotionContents().withPotion(org.bukkit.craftbukkit.potion.CraftPotionType.bukkitToMinecraftHolder(potionType)));
     }
 
     @Override
     public PotionType getBasePotionType() {
-        return null; // TODO
+        return this.getHandle().getPotionContents().potion().map(org.bukkit.craftbukkit.potion.CraftPotionType::minecraftHolderToBukkit).orElse(null);
     }
 
     @Override

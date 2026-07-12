@@ -13,6 +13,8 @@ public class ConnectionMixin implements ConnectionBridge {
     public UUID spoofedUUID;
     public Property[] spoofedProfile;
     public boolean preparing = true;
+    public java.net.InetSocketAddress virtualHost;
+    public java.net.SocketAddress haProxyAddress;
 
     @Override
     public SocketAddress getRawAddress() {
@@ -37,6 +39,26 @@ public class ConnectionMixin implements ConnectionBridge {
     @Override
     public void setSpoofedProfile(Property[] profile) {
         this.spoofedProfile = profile;
+    }
+
+    @Override
+    public java.net.InetSocketAddress getVirtualHost() {
+        return this.virtualHost;
+    }
+
+    @Override
+    public void setVirtualHost(java.net.InetSocketAddress address) {
+        this.virtualHost = address;
+    }
+
+    @Override
+    public java.net.SocketAddress getHAProxyAddress() {
+        return this.haProxyAddress;
+    }
+
+    @Override
+    public void setHAProxyAddress(java.net.SocketAddress address) {
+        this.haProxyAddress = address;
     }
 
 }

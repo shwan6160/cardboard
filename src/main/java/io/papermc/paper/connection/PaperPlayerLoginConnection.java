@@ -55,14 +55,12 @@ public class PaperPlayerLoginConnection extends ReadablePlayerCookieConnectionIm
 
 	@Nullable
 	public InetSocketAddress getVirtualHost() {
-		return null; // TODO
-		// return packetListener_connection().virtualHost;
+		return ((org.cardboardpowered.bridge.network.ConnectionBridge) packetListener_connection()).getVirtualHost();
 	}
 
 	@Nullable
 	public InetSocketAddress getHAProxyAddress() {
-		return null; // TODO
-		// return packetListener_connection().haProxyAddress instanceof InetSocketAddress inetSocketAddress ? inetSocketAddress : null;
+		return ((org.cardboardpowered.bridge.network.ConnectionBridge) packetListener_connection()).getHAProxyAddress() instanceof InetSocketAddress inetSocketAddress ? inetSocketAddress : null;
 	}
 
 	public boolean isTransferred() {

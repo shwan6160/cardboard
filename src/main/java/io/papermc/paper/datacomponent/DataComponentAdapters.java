@@ -161,6 +161,7 @@ public final class DataComponentAdapters {
         register(DataComponents.PROVIDES_TRIM_MATERIAL, CraftTrimMaterial::minecraftHolderToBukkit, CraftTrimMaterial::bukkitToMinecraftHolder);
         register(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, PaperOminousBottleAmplifier::new);
         register(DataComponents.JUKEBOX_PLAYABLE, PaperJukeboxPlayable::new);
+        register(DataComponents.SULFUR_CUBE_CONTENT, io.papermc.paper.datacomponent.item.PaperSulfurCubeContent::new);
         
         register(DataComponents.PROVIDES_BANNER_PATTERNS, set -> PaperRegistrySets.convertToApi(RegistryKey.BANNER_PATTERN, set), set -> PaperRegistrySets.convertToNms(Registries.BANNER_PATTERN, Conversions.global().lookup(), set));
         register(

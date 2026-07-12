@@ -3,13 +3,13 @@ package org.cardboardpowered.mixin.world.entity.monster;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.world.entity.monster.cubemob.Slime;
+import net.minecraft.world.entity.monster.cubemob.AbstractCubeMob;
 import org.cardboardpowered.mixin.world.entity.EntityMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.cardboardpowered.bridge.world.entity.monster.SlimeBridge;
 
-@Mixin(Slime.class)
+@Mixin(AbstractCubeMob.class)
 public class SlimeMixin extends EntityMixin implements SlimeBridge {
 
     @Shadow public int getSize() {return 0;}

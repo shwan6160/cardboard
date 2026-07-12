@@ -1,0 +1,77 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  com.bergerkiller.bukkit.common.inventory.CommonItemStack
+ *  com.bergerkiller.bukkit.common.utils.FaceUtil
+ *  org.bukkit.ChatColor
+ *  org.bukkit.Location
+ *  org.bukkit.block.Block
+ *  org.bukkit.entity.Player
+ *  org.bukkit.util.Vector
+ */
+package com.bergerkiller.bukkit.tc.debug.types;
+
+import com.bergerkiller.bukkit.common.inventory.CommonItemStack;
+import com.bergerkiller.bukkit.common.utils.FaceUtil;
+import com.bergerkiller.bukkit.tc.TrainCarts;
+import com.bergerkiller.bukkit.tc.controller.components.RailPath;
+import com.bergerkiller.bukkit.tc.controller.components.RailPiece;
+import com.bergerkiller.bukkit.tc.controller.components.RailState;
+import com.bergerkiller.bukkit.tc.debug.DebugToolType;
+import com.bergerkiller.bukkit.tc.rails.type.RailType;
+import com.bergerkiller.bukkit.tc.utils.TrackWalkingPoint;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
+
+public abstract class DebugToolTrackWalkerType
+implements DebugToolType {
+    @Override
+    public final void onBlockInteract(TrainCarts trainCarts, Player player, Block clickedBlock, CommonItemStack item, boolean isRightClick) {
+        TrackWalkingPoint walker = null;
+        if (clickedBlock != null) {
+            Vector direction = player.getEyeLocation().getDirection();
+            walker = new TrackWalkingPoint(clickedBlock, FaceUtil.getDirection((Vector)direction, (boolean)false));
+            walker.setLoopFilter(true);
+            if (walker.state.railType() == RailType.NONE) {
+                walker = null;
+            }
+        }
+        if (walker == null) {
+            Location loc = player.getEyeLocation();
+            Vector dir = loc.getDirection();
+            RailState result = null;
+            RailState state = new RailState();
+            state.setRailPiece(RailPiece.createWorldPlaceholder(loc.getWorld()));
+            state.position().setMotion(dir);
+            state.initEnterDirection();
+            double minDist = Double.MAX_VALUE;
+            for (double d = 0.0; d <= 200.0; d += 0.01) {
+                RailPath.Position p = state.position();
+                p.posX = loc.getX() + dir.getX() * d;
+                p.posY = loc.getY() + dir.getY() * d;
+                p.posZ = loc.getZ() + dir.getZ() * d;
+                if (!RailType.loadRailInformation(state)) continue;
+                RailPath path = state.loadRailLogic().getPath();
+                double distSq = path.distanceSquared(state.railPosition());
+                if (!(distSq < minDist)) break;
+                minDist = distSq;
+                result = state.clone();
+                path.snap(result.position(), result.railBlock());
+            }
+            if (result == null) {
+                player.sendMessage(ChatColor.RED + "No rails found here");
+                return;
+            }
+            walker = new TrackWalkingPoint(result);
+            walker.setLoopFilter(true);
+        }
+        this.onBlockInteract(trainCarts, player, walker, item, isRightClick);
+    }
+
+    public abstract void onBlockInteract(TrainCarts var1, Player var2, TrackWalkingPoint var3, CommonItemStack var4, boolean var5);
+}
+

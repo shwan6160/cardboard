@@ -1,0 +1,40 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  com.bergerkiller.bukkit.common.bases.IntVector3
+ */
+package com.bergerkiller.bukkit.tc.attachments.control.light;
+
+import com.bergerkiller.bukkit.common.bases.IntVector3;
+import com.bergerkiller.bukkit.tc.attachments.control.light.LightAPIController;
+
+class LightAPIControllerUnavailable
+extends LightAPIController {
+    public static final LightAPIControllerUnavailable INSTANCE = new LightAPIControllerUnavailable();
+
+    private LightAPIControllerUnavailable() {
+    }
+
+    @Override
+    public void add(IntVector3 position, int level) {
+    }
+
+    @Override
+    public void remove(IntVector3 position, int level) {
+    }
+
+    @Override
+    public void move(IntVector3 old_position, IntVector3 new_position, int level) {
+    }
+
+    @Override
+    public void update(IntVector3 position, int old_level, int new_level) {
+    }
+
+    @Override
+    protected boolean onSync() {
+        return false;
+    }
+}
+

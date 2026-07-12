@@ -1,0 +1,34 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package com.bergerkiller.bukkit.common.internal.logic;
+
+import com.bergerkiller.bukkit.common.internal.logic.EntityTypingHandler_1_8;
+import com.bergerkiller.generated.net.minecraft.world.entity.EntityTypeHandle;
+import com.bergerkiller.mountiplex.reflection.declarations.ClassResolver;
+import com.bergerkiller.mountiplex.reflection.declarations.MethodDeclaration;
+import com.bergerkiller.mountiplex.reflection.util.FastMethod;
+
+class EntityTypingHandler_1_13
+extends EntityTypingHandler_1_8 {
+    private final FastMethod<Class<?>> findEntityTypesClass = new FastMethod();
+
+    public EntityTypingHandler_1_13() {
+        ClassResolver resolver = new ClassResolver();
+        resolver.setDeclaredClass(EntityTypeHandle.T.getType());
+        MethodDeclaration m = new MethodDeclaration(resolver, "public Class<? extends T> c();");
+        try {
+            m.method = resolver.getDeclaredClass().getDeclaredMethod("c", new Class[0]);
+        }
+        catch (Throwable throwable) {
+            // empty catch block
+        }
+        this.findEntityTypesClass.init(m);
+    }
+
+    @Override
+    public Class<?> getClassFromEntityTypes(Object nmsEntityTypesInstance) {
+        return this.findEntityTypesClass.invoke(nmsEntityTypesInstance);
+    }
+}
+

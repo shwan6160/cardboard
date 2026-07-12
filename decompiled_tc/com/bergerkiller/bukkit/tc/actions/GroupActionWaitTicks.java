@@ -1,0 +1,63 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package com.bergerkiller.bukkit.tc.actions;
+
+import com.bergerkiller.bukkit.tc.actions.GroupActionWaitForever;
+import com.bergerkiller.bukkit.tc.actions.registry.ActionRegistry;
+import com.bergerkiller.bukkit.tc.controller.components.ActionTracker;
+import com.bergerkiller.bukkit.tc.controller.status.TrainStatus;
+import com.bergerkiller.bukkit.tc.offline.train.format.OfflineDataBlock;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+public class GroupActionWaitTicks
+extends GroupActionWaitForever {
+    private int ticks;
+
+    public GroupActionWaitTicks(int ticks) {
+        this.ticks = ticks;
+    }
+
+    public int getRemainingTicks() {
+        return this.ticks;
+    }
+
+    @Override
+    public List<TrainStatus> getStatusInfo() {
+        if (this.ticks > 0) {
+            return Collections.singletonList(new TrainStatus.WaitingForDuration(this.ticks * 50));
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public boolean update() {
+        if (this.ticks <= 0) {
+            return true;
+        }
+        --this.ticks;
+        return super.update();
+    }
+
+    public static class Serializer
+    implements ActionRegistry.Serializer<GroupActionWaitTicks> {
+        @Override
+        public boolean save(GroupActionWaitTicks action, OfflineDataBlock data, ActionTracker tracker) throws IOException {
+            data.addChild("wait-ticks", stream -> stream.writeInt(action.getRemainingTicks()));
+            return true;
+        }
+
+        @Override
+        public GroupActionWaitTicks load(OfflineDataBlock data, ActionTracker tracker) throws IOException {
+            int ticks;
+            try (DataInputStream stream = data.findChildOrThrow("wait-ticks").readData();){
+                ticks = stream.readInt();
+            }
+            return new GroupActionWaitTicks(ticks);
+        }
+    }
+}
+

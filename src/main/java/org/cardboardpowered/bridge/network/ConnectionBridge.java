@@ -17,4 +17,12 @@ public interface ConnectionBridge {
 
     void setSpoofedProfile(Property[] profile);
 
+    java.net.InetSocketAddress getVirtualHost();
+
+    void setVirtualHost(java.net.InetSocketAddress address);
+
+    java.net.SocketAddress getHAProxyAddress();
+
+    void setHAProxyAddress(java.net.SocketAddress address);
+
 }

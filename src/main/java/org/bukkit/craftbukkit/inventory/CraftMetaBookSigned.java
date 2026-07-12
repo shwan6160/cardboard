@@ -453,31 +453,13 @@ public class CraftMetaBookSigned extends CraftMetaItem implements BookMeta {
         this.pages = io.papermc.paper.adventure.PaperAdventure.asVanilla(pages);
     }
 
-    static final class CraftMetaBookSignedBuilder extends CraftMetaBook.CraftMetaBookBuilder {
-        private net.kyori.adventure.text.Component title;
-        private net.kyori.adventure.text.Component author;
-
-        @Override
-        public BookMetaBuilder title(final net.kyori.adventure.text.Component title) {
-            this.title = title;
-            return this;
-        }
-
-        @Override
-        public BookMetaBuilder author(final net.kyori.adventure.text.Component author) {
-            this.author = author;
-            return this;
-        }
-
-        @Override
-        public BookMeta build() {
-            return new CraftMetaBookSigned(this.title, this.author, this.pages);
-        }
-    }
-
     @Override
-    public BookMetaBuilder toBuilder() {
-        return new CraftMetaBookSignedBuilder();
+    public @org.jetbrains.annotations.NotNull net.kyori.adventure.inventory.Book asBook() {
+        return net.kyori.adventure.inventory.Book.book(
+            this.hasTitle() ? net.kyori.adventure.text.Component.text(this.getTitle()) : net.kyori.adventure.text.Component.empty(),
+            this.hasAuthor() ? net.kyori.adventure.text.Component.text(this.getAuthor()) : net.kyori.adventure.text.Component.empty(),
+            this.pages().stream().map(p -> (net.kyori.adventure.text.Component) p).toList()
+        );
     }
 
     @Override

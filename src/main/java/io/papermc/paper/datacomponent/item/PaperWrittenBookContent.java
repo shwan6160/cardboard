@@ -43,6 +43,13 @@ public record PaperWrittenBookContent(
     }
 
     @Override
+    public @org.jetbrains.annotations.NotNull net.kyori.adventure.inventory.Book asBook() {
+        return net.kyori.adventure.inventory.Book.book(
+            net.kyori.adventure.text.Component.text(this.author()),
+            net.kyori.adventure.text.Component.text(this.title().raw()),
+            this.pages().stream().map(p -> (net.kyori.adventure.text.Component) p).toList()
+        );
+    }
     public @Unmodifiable List<Filtered<Component>> pages() {
         return MCUtil.transformUnmodifiable(
             this.impl.pages(),

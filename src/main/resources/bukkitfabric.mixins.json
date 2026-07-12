@@ -80,6 +80,7 @@
     "stats.ServerStatsCounterMixin",
     "stats.StatsCounterMixin",
     "world.MixinContainer",
+    "world.clock.ServerClockManagerMixin",
     "world.CompoundContainerMixin",
     "world.SimpleContainerMixin",
     "world.damagesource.DamageSourceMixin",

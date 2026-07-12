@@ -24,6 +24,15 @@ public record PaperWritableBookContent(
         return MCUtil.transformUnmodifiable(this.impl.pages(), input -> Filtered.of(input.raw(), input.filtered().orElse(null)));
     }
 
+    @Override
+    public @org.jetbrains.annotations.NotNull net.kyori.adventure.inventory.Book asBook() {
+        return net.kyori.adventure.inventory.Book.book(
+            net.kyori.adventure.text.Component.empty(),
+            net.kyori.adventure.text.Component.empty(),
+            this.pages().stream().map(p -> (net.kyori.adventure.text.Component) net.kyori.adventure.text.Component.text(p.raw())).toList()
+        );
+    }
+
     static final class BuilderImpl implements WritableBookContent.Builder {
 
         private final List<Filterable<String>> pages = new ObjectArrayList<>();

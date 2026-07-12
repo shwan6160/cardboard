@@ -31,7 +31,7 @@ public abstract class RecipeManagerMixin implements RecipeManagerBridge {
 
     @Override
 	public  Multimap<RecipeType<?>, RecipeHolder<?>> cb$get_recipesByType() {
-		return null; // TODO return recipesByType;
+		return this.recipes != null ? this.recipes.byType : null;
 	}
 
     @Unique
