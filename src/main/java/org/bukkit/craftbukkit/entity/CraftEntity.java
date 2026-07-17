@@ -136,7 +136,27 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
             return (CraftEntity) entityTypeData.convertFunction().apply(server, entity);
         }
 
-        throw new AssertionError("Unknown entity " + (entity == null ? null : entity.getClass()));
+        // Cardboard start: fallback for modded/custom entities
+        if (entity instanceof net.minecraft.world.entity.monster.Monster) {
+            return new CraftMonster(server, (net.minecraft.world.entity.monster.Monster) entity);
+        }
+        if (entity instanceof net.minecraft.world.entity.animal.Animal) {
+            return new CraftAnimals(server, (net.minecraft.world.entity.animal.Animal) entity);
+        }
+        if (entity instanceof net.minecraft.world.entity.AgeableMob) {
+            return new CraftAgeable(server, (net.minecraft.world.entity.AgeableMob) entity);
+        }
+        if (entity instanceof net.minecraft.world.entity.PathfinderMob) {
+            return new CraftCreature(server, (net.minecraft.world.entity.PathfinderMob) entity);
+        }
+        if (entity instanceof net.minecraft.world.entity.Mob) {
+            return new CraftCustomMob(server, (net.minecraft.world.entity.Mob) entity);
+        }
+        if (entity instanceof net.minecraft.world.entity.LivingEntity) {
+            return new CraftLivingEntity(server, (net.minecraft.world.entity.LivingEntity) entity);
+        }
+        return new CraftCustomEntity(entity);
+        // Cardboard end
     }
 
     public Entity getHandle() {

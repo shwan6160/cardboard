@@ -953,3 +953,4 @@ accessible field net/minecraft/server/network/ServerCommonPacketListenerImpl tra
 accessible method net/minecraft/world/entity/projectile/arrow/Arrow getPotionContents ()Lnet/minecraft/world/item/alchemy/PotionContents;
 accessible method net/minecraft/world/entity/projectile/arrow/Arrow setPotionContents (Lnet/minecraft/world/item/alchemy/PotionContents;)V
 accessible method net/minecraft/server/level/ServerLevel getEntities ()Lnet/minecraft/world/level/entity/LevelEntityGetter;
+accessible method net/minecraft/world/entity/monster/cubemob/SulfurCube setFuse (I)V
